@@ -62,6 +62,7 @@
     
     Contato *contato = [[self contatos] objectAtIndex:[indexPath row]];
     [[cell textLabel] setText: [contato nome]];
+    [[cell textLabel] setFont: [UIFont systemFontOfSize:14]];
 
     return cell;
     

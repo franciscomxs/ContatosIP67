@@ -12,19 +12,32 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window, contatos;
+@synthesize window = _window, contatos, arquivoContatos;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setContatos: [[NSMutableArray alloc] init]];
+    [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
+    
+    NSArray *usersDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString  *documentDir = [usersDirs objectAtIndex:0];
+    self.arquivoContatos = [NSString stringWithFormat:@"%@/ArquivoContatos", documentDir];
+    
+    self.contatos = [NSKeyedUnarchiver unarchiveObjectWithFile:self.arquivoContatos];
+    if(!self.contatos){
+        self.contatos = [[NSMutableArray alloc] init ];
+    }
+    
+    
     ListaContatosViewController *lista = [[ListaContatosViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lista];
 
     [lista setContatos: [self contatos]];
-    [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
+    
     [[self window] setRootViewController: nav];
     [[self window] setBackgroundColor: [UIColor whiteColor]];
     [[self window] makeKeyAndVisible];
+    
+        
     return YES;
     
 }
@@ -39,6 +52,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [NSKeyedArchiver archiveRootObject:self.contatos toFile:self.arquivoContatos];
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
