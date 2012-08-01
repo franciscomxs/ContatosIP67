@@ -22,7 +22,9 @@
 //                          otherButtonTitles:nil];
 //    [alert show];
     FormularioContatoViewConroller *f = [[FormularioContatoViewConroller alloc] init];
-    [f setContatos: [self contatos]];
+    f.delegate = self;
+    f.contatos = [self contatos];
+    
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:f];
 // -- Transição
 //    [f setModalTransitionStyle: UIModalTransitionStyleCrossDissolve ];
@@ -42,6 +44,12 @@
         [[self navigationItem] setLeftBarButtonItem:self.editButtonItem];
     }
     return self;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    Contato *tempContato = [self.contatos objectAtIndex:sourceIndexPath.row];
+    [self.contatos removeObjectAtIndex:sourceIndexPath.row];
+    [self.contatos insertObject:tempContato atIndex:destinationIndexPath.row];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -89,10 +97,17 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Contato *c = [self.contatos objectAtIndex:indexPath.row];
-    NSLog(@"Nome: %@ - Email: %@", c.nome, c.email);
     FormularioContatoViewConroller *form = [[FormularioContatoViewConroller alloc] initWithContato:c ];
+    form.delegate = self;
     form.contatos = self.contatos;
     [self.navigationController pushViewController:form animated:YES];
+}
+
+-(void)contatoAtualizado:(Contato *)contato{
+    NSLog(@"Atualizado: %d", [self.contatos indexOfObject:contato]);
+}
+-(void)contatoAdicionado:(Contato *)contato{
+    NSLog(@"Adicionado: %d", [self.contatos indexOfObject:contato]);
 }
 
 @end

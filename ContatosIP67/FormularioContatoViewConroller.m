@@ -9,7 +9,7 @@
 #import "FormularioContatoViewConroller.h"
 
 @implementation FormularioContatoViewConroller : UIViewController
-@synthesize nome, telefone, email, endereco, site, contatos;
+@synthesize nome, telefone, email, endereco, site, contatos, contato, delegate;
 
 -(Contato *)pegaDadosFormulario{
     /*
@@ -21,21 +21,35 @@
     [dadosDoContato setObject:[endereco text] forKey:@"endereco"];
     NSLog(@"dados: %@", dadosDoContato);
     */
-    Contato *c = [[Contato alloc] init ];
-    c.nome = nome.text;
-    c.email = email.text;
-    c.telefone = telefone.text;
-    c.endereco = endereco.text;
-    c.site = site.text;
-    return c;
+    if(!self.contato)
+    {
+        contato = [[Contato alloc] init ];
+    }
+    
+    contato.nome = nome.text;
+    contato.email = email.text;
+    contato.telefone = telefone.text;
+    contato.endereco = endereco.text;
+    contato.site = site.text;
+    return contato;
     
 }
 -(void)criaContato{
-    Contato *c = [self pegaDadosFormulario];
-    [[self contatos] addObject:c];
+    Contato * novoContato = [self pegaDadosFormulario];
+    [[self contatos] addObject:[self pegaDadosFormulario]];
     [self dismissModalViewControllerAnimated:YES];
-    NSLog(@"Adicionado contato: %@", [c nome]);
-    NSLog(@"Contatos: %i", [[self contatos] count]);
+    
+    if (self.delegate) {
+        [self.delegate contatoAdicionado:novoContato];
+    }
+}
+#pragma mark - Métodos de tal funcionalidade
+-(void)atualizaContato{
+    Contato * contatoAtualizado = [self pegaDadosFormulario];
+    if(self.delegate){
+        [self.delegate contatoAtualizado:contatoAtualizado];
+    }
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 -(void)cancela{
@@ -65,6 +79,33 @@
     }
     return self;
 }
+
+-(id)initWithContato:(Contato *)_contato{
+    self = [super init];
+    if(self){
+        self.contato = _contato;
+        UIBarButtonItem *confirmar = [[UIBarButtonItem alloc]
+                                      initWithTitle:@"Confirmar"
+                                      style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(atualizaContato)];
+        self.navigationItem.rightBarButtonItem = confirmar;
+        
+    }
+    return self;
+}
+
+-(void)viewDidLoad{
+    if(self.contato)
+    {
+        nome.text = contato.nome;
+        email.text = contato.email;
+        telefone.text = contato.telefone;
+        endereco.text = contato.endereco;
+        site.text = contato.site;
+    }
+}
+
 
 -(void) dealloc{
     self.contatos = nil;

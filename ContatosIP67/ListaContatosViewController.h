@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ListaContatosProtocol.h"
 
-@interface ListaContatosViewController : UITableViewController
+@interface ListaContatosViewController : UITableViewController<ListaContatosProtocol>
 @property (weak) NSMutableArray *contatos;
+-(void)contatoAtualizado:(Contato *)contato;
+-(void)contatoAdicionado:(Contato *)contato;
 @end

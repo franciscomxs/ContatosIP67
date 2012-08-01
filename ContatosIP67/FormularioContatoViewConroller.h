@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListaContatosProtocol.h"
 #import "Contato.h"
 
 @interface FormularioContatoViewConroller : UIViewController
@@ -16,4 +17,7 @@
 @property(nonatomic, weak) IBOutlet UITextField *endereco;
 @property(nonatomic, weak) IBOutlet UITextField *site;
 @property(strong) NSMutableArray *contatos;
+@property(strong) Contato *contato;
+-(id)initWithContato:(Contato *)_contato;
+@property (weak) id<ListaContatosProtocol> delegate;
 @end
