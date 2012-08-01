@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "ListaContatosProtocol.h"
 
-@interface ListaContatosViewController : UITableViewController<ListaContatosProtocol, UIActionSheetDelegate>
+@interface ListaContatosViewController : UITableViewController<ListaContatosProtocol, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 {
     Contato * contatoSelecionado;
 }

@@ -17,6 +17,7 @@
 		D34A100E15C6FCF600346376 /* FormularioContatoViewConroller.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A100C15C6FCF600346376 /* FormularioContatoViewConroller.m */; };
 		D34A100F15C6FCF600346376 /* FormularioContatoViewConroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = D34A100D15C6FCF600346376 /* FormularioContatoViewConroller.xib */; };
 		D34A101215C7193C00346376 /* Contato.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A101115C7193C00346376 /* Contato.m */; };
+		D37E1A8015C9AA2300DB2269 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3AFF43615C9A239007B204B /* MessageUI.framework */; };
 		D3D4DC9615C86D53004D67C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3D4DC9815C86D53004D67C2 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		D34A100D15C6FCF600346376 /* FormularioContatoViewConroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormularioContatoViewConroller.xib; sourceTree = "<group>"; };
 		D34A101015C7193C00346376 /* Contato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contato.h; sourceTree = "<group>"; };
 		D34A101115C7193C00346376 /* Contato.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contato.m; sourceTree = "<group>"; };
+		D3AFF43615C9A239007B204B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D3D4492F15C974B300BE4B06 /* ListaContatosProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListaContatosProtocol.h; sourceTree = "<group>"; };
 		D3D4DC9215C86CC0004D67C2 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = /Users/ios2984/Desktop/ContatosIP67/ContatosIP67/pt.lproj/InfoPlist.strings; sourceTree = "<absolute>"; };
 		D3D4DC9715C86D53004D67C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D37E1A8015C9AA2300DB2269 /* MessageUI.framework in Frameworks */,
 				D34A0FF515C6FB6D00346376 /* UIKit.framework in Frameworks */,
 				D34A0FF715C6FB6D00346376 /* Foundation.framework in Frameworks */,
 				D34A0FF915C6FB6D00346376 /* CoreGraphics.framework in Frameworks */,
@@ -78,6 +81,7 @@
 		D34A0FF315C6FB6D00346376 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3AFF43615C9A239007B204B /* MessageUI.framework */,
 				D34A0FF415C6FB6D00346376 /* UIKit.framework */,
 				D34A0FF615C6FB6D00346376 /* Foundation.framework */,
 				D34A0FF815C6FB6D00346376 /* CoreGraphics.framework */,

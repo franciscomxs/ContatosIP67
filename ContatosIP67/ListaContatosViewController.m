@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+
 #import "ListaContatosViewController.h"
 #import "FormularioContatoViewConroller.h"
 
@@ -13,6 +14,7 @@
 @synthesize contatos;
 
 #pragma mark - Métodos de apoio
+
 -(void)exibeFormulario{
 // -- Alerta
 //    UIAlertView *alert = [[UIAlertView alloc]
@@ -33,7 +35,52 @@
     
 }
 
+-(void) abrirAplicativoComUrl:(NSString *) url{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
+#pragma mark - Acões do Usuário
+
+-(void)ligar{
+    UIDevice *device = [UIDevice currentDevice];
+    if ([device.model isEqualToString:@"iPhone"]) {
+        NSString *numero = [NSString stringWithFormat:@"tel:%@", contatoSelecionado.telefone];
+        [self abrirAplicativoComUrl:numero];
+    }else{
+        [[[UIAlertView alloc] initWithTitle:@"Impossível fazer a ligação" message:@"Seu dispositivo não é um iPhone" delegate:self cancelButtonTitle:@"Cancelar" otherButtonTitles: nil] show];
+    }
+}
+
+-(void)enviarEmail{
+    if([MFMailComposeViewController canSendMail]){
+        MFMailComposeViewController *enviadorEmail = [[MFMailComposeViewController alloc] init];
+        [enviadorEmail setMailComposeDelegate: self];
+        [enviadorEmail setToRecipients:[NSArray arrayWithObject:contatoSelecionado.email]];
+        [enviadorEmail setSubject:@"Caelum"];
+        [self presentModalViewController:enviadorEmail animated:YES];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ops!" message:@"Nao pode enviar email" delegate:self cancelButtonTitle:@"Cancelar" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)abrirSite{
+    NSString * url = [NSString stringWithFormat:@"http://%@", contatoSelecionado.site];
+    [self abrirAplicativoComUrl:url];
+}
+
+-(void)abrirMapa{
+    NSString * url = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", contatoSelecionado.site];
+    [self abrirAplicativoComUrl:url];
+}
+
 #pragma mark - Construtores
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -136,8 +183,24 @@
     }
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
+    switch (buttonIndex) {
+        case 0:
+            [self ligar];
+            break;
+        case 1:
+            [self enviarEmail];
+            break;
+        case 2:
+            [self abrirSite];
+            break;
+        case 3:
+            [self abrirMapa];
+            break;
+        default:
+            break;
+    }
 }
+
 
 #pragma mark - Memória
 
