@@ -33,7 +33,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.navigationItem.title = NSLocalizedString(@"titulo_contatos", nil);
+        self.navigationItem.title = NSLocalizedString(@"contatos", nil);
         UIBarButtonItem *botaoExibirFormulario = [[UIBarButtonItem alloc] 
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                   target:self
@@ -85,6 +85,14 @@
         NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
         [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Contato *c = [self.contatos objectAtIndex:indexPath.row];
+    NSLog(@"Nome: %@ - Email: %@", c.nome, c.email);
+    FormularioContatoViewConroller *form = [[FormularioContatoViewConroller alloc] initWithContato:c ];
+    form.contatos = self.contatos;
+    [self.navigationController pushViewController:form animated:YES];
 }
 
 @end
