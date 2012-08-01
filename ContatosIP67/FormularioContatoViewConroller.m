@@ -9,7 +9,7 @@
 #import "FormularioContatoViewConroller.h"
 
 @implementation FormularioContatoViewConroller : UIViewController
-@synthesize nome, telefone, email, endereco, site, contatos, contato, delegate;
+@synthesize nome, telefone, email, endereco, site, contatos, contato, delegate, twitter;
 
 -(Contato *)pegaDadosFormulario{
     /*
@@ -31,6 +31,7 @@
     contato.telefone = telefone.text;
     contato.endereco = endereco.text;
     contato.site = site.text;
+    contato.twitter = twitter.text;
     return contato;
     
 }
@@ -104,6 +105,7 @@
         telefone.text = contato.telefone;
         endereco.text = contato.endereco;
         site.text = contato.site;
+        twitter.text = contato.twitter;
     }
 }
 

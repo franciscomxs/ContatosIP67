@@ -9,7 +9,7 @@
 
 #import "ListaContatosViewController.h"
 #import "FormularioContatoViewConroller.h"
-
+#import <Twitter/TWTweetComposeViewController.h>
 @implementation ListaContatosViewController
 @synthesize contatos;
 
@@ -77,6 +77,12 @@
 -(void)abrirMapa{
     NSString * url = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", contatoSelecionado.site];
     [self abrirAplicativoComUrl:url];
+}
+
+-(void)enviarTweet{
+    TWTweetComposeViewController *tweet = [[TWTweetComposeViewController alloc] init];
+    [tweet setInitialText: [NSString stringWithFormat:@"@%@", contatoSelecionado.twitter]];
+    [self presentModalViewController:tweet animated:YES];
 }
 
 #pragma mark - Construtores
@@ -178,7 +184,7 @@
                                  delegate:self
                                  cancelButtonTitle:@"Cancelar"
                                  destructiveButtonTitle:nil
-                                 otherButtonTitles:@"Ligar", @"Enviar Email", @"Visualizar Site", @"Abrir Mapa", nil];
+                                 otherButtonTitles:@"Ligar", @"Enviar Email", @"Visualizar Site", @"Abrir Mapa", @"Tweetar", nil];
         [opcoes showInView:self.view];
     }
 }
@@ -195,6 +201,9 @@
             break;
         case 3:
             [self abrirMapa];
+            break;
+        case 4:
+            [self enviarTweet];
             break;
         default:
             break;

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface Contato : NSObject <NSCoding>
-@property(nonatomic, strong) NSString *nome, *email, *telefone, *endereco, *site;
+@property(nonatomic, strong) NSString *nome, *email, *telefone, *endereco, *site, *twitter;
 @end

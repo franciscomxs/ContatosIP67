@@ -14,6 +14,7 @@
 @synthesize telefone = _telefone;
 @synthesize endereco = _endereco;
 @synthesize site = _site;
+@synthesize twitter = _twitter;
 
 -(void)setNome:(NSString *)nome{
     if(nome.length > 0){
@@ -42,12 +43,22 @@
     }
 }
 
+-(void)setTweet_user:(NSString *)twitter{
+    if(twitter.length > 0){
+        _twitter = twitter;
+    }
+    else{
+        _twitter = @"NÃO TEM";
+    }    
+}
+
 -(void)encodeWithCoder:(NSCoder *)coder{
     [coder encodeObject:self.nome forKey:@"nome"];
     [coder encodeObject:self.email forKey:@"email"];
     [coder encodeObject:self.telefone forKey:@"telefone"];
     [coder encodeObject:self.endereco forKey:@"endereco"];
     [coder encodeObject:self.site forKey:@"site"];
+    [coder encodeObject:self.site forKey:@"tweet_user"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder{
@@ -58,6 +69,7 @@
         [self setTelefone: [decoder decodeObjectForKey:@"telefone"]];
         [self setEndereco: [decoder decodeObjectForKey:@"endereco"]];
         [self setSite: [decoder decodeObjectForKey:@"site"]];
+        [self setSite: [decoder decodeObjectForKey:@"tweet_user"]];
     }
     
     return self;

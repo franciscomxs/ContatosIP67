@@ -16,6 +16,7 @@
 @property(nonatomic, weak) IBOutlet UITextField *email;
 @property(nonatomic, weak) IBOutlet UITextField *endereco;
 @property(nonatomic, weak) IBOutlet UITextField *site;
+@property(nonatomic, weak) IBOutlet UITextField *twitter;
 @property(strong) NSMutableArray *contatos;
 @property(strong) Contato *contato;
 -(id)initWithContato:(Contato *)_contato;
