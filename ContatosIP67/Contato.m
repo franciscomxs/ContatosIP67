@@ -24,6 +24,24 @@
     }
 }
 
+-(void)setEmail:(NSString *)email{
+    if(email.length > 0){
+        _email = email;
+    }
+    else{
+        _email = @"NÃO TEM";
+    }
+}
+
+-(void)setTelefone:(NSString *)telefone{
+    if(telefone.length > 0){
+        _telefone = telefone;
+    }
+    else{
+        _telefone = @"NÃO TEM";
+    }
+}
+
 -(void)encodeWithCoder:(NSCoder *)coder{
     [coder encodeObject:self.nome forKey:@"nome"];
     [coder encodeObject:self.email forKey:@"email"];
