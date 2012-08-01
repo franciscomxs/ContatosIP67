@@ -33,12 +33,13 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.navigationItem.title = @"Contatos";
+        self.navigationItem.title = NSLocalizedString(@"titulo_contatos", nil);
         UIBarButtonItem *botaoExibirFormulario = [[UIBarButtonItem alloc] 
                                                   initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                   target:self
                                                   action:@selector(exibeFormulario)];
         self.navigationItem.rightBarButtonItem = botaoExibirFormulario;
+        [[self navigationItem] setLeftBarButtonItem:self.editButtonItem];
     }
     return self;
 }
@@ -74,6 +75,16 @@
 
 -(void) dealloc{
     self.contatos = nil;
+}
+
+-(void)tableView:(UITableView *)tableView
+            commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+            forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.contatos removeObjectAtIndex:indexPath.row];
+        NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+        [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 @end
