@@ -43,7 +43,7 @@
         [self.delegate contatoAdicionado:novoContato];
     }
 }
-#pragma mark - Métodos de tal funcionalidade
+#pragma mark - 
 -(void)atualizaContato{
     Contato * contatoAtualizado = [self pegaDadosFormulario];
     if(self.delegate){
@@ -96,6 +96,7 @@
 }
 
 -(void)viewDidLoad{
+    
     if(self.contato)
     {
         nome.text = contato.nome;

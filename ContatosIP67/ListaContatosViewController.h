@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "ListaContatosProtocol.h"
 
-@interface ListaContatosViewController : UITableViewController<ListaContatosProtocol>
+@interface ListaContatosViewController : UITableViewController<ListaContatosProtocol, UIActionSheetDelegate>
+{
+    Contato * contatoSelecionado;
+}
 @property (weak) NSMutableArray *contatos;
 -(void)contatoAtualizado:(Contato *)contato;
 -(void)contatoAdicionado:(Contato *)contato;
+-(void)exibeMaisAcoes:(UIGestureRecognizer *)gesture;
 @end

@@ -17,6 +17,7 @@
 		D34A100E15C6FCF600346376 /* FormularioContatoViewConroller.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A100C15C6FCF600346376 /* FormularioContatoViewConroller.m */; };
 		D34A100F15C6FCF600346376 /* FormularioContatoViewConroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = D34A100D15C6FCF600346376 /* FormularioContatoViewConroller.xib */; };
 		D34A101215C7193C00346376 /* Contato.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A101115C7193C00346376 /* Contato.m */; };
+		D3D4DC9615C86D53004D67C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3D4DC9815C86D53004D67C2 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,10 @@
 		D34A100D15C6FCF600346376 /* FormularioContatoViewConroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormularioContatoViewConroller.xib; sourceTree = "<group>"; };
 		D34A101015C7193C00346376 /* Contato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contato.h; sourceTree = "<group>"; };
 		D34A101115C7193C00346376 /* Contato.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contato.m; sourceTree = "<group>"; };
+		D3D4492F15C974B300BE4B06 /* ListaContatosProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListaContatosProtocol.h; sourceTree = "<group>"; };
+		D3D4DC9215C86CC0004D67C2 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = /Users/ios2984/Desktop/ContatosIP67/ContatosIP67/pt.lproj/InfoPlist.strings; sourceTree = "<absolute>"; };
+		D3D4DC9715C86D53004D67C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D3D4DC9915C86D58004D67C2 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,15 +88,12 @@
 		D34A0FFA15C6FB6D00346376 /* ContatosIP67 */ = {
 			isa = PBXGroup;
 			children = (
-				D34A101015C7193C00346376 /* Contato.h */,
-				D34A101115C7193C00346376 /* Contato.m */,
-				D3038B7D15C80D65009EE23D /* ListaContatosViewController.h */,
-				D3038B7E15C80D65009EE23D /* ListaContatosViewController.m */,
-				D34A100315C6FB6D00346376 /* AppDelegate.h */,
-				D34A100B15C6FCF600346376 /* FormularioContatoViewConroller.h */,
-				D34A100C15C6FCF600346376 /* FormularioContatoViewConroller.m */,
-				D34A100D15C6FCF600346376 /* FormularioContatoViewConroller.xib */,
 				D34A100415C6FB6D00346376 /* AppDelegate.m */,
+				D34A100315C6FB6D00346376 /* AppDelegate.h */,
+				D3D4493515C9853900BE4B06 /* Model */,
+				D3D4493815C985C600BE4B06 /* Protocol */,
+				D3D4493715C985BD00BE4B06 /* Controller */,
+				D3D4493615C985B500BE4B06 /* View */,
 				D34A0FFB15C6FB6D00346376 /* Supporting Files */,
 			);
 			path = ContatosIP67;
@@ -104,8 +106,45 @@
 				D34A0FFD15C6FB6D00346376 /* InfoPlist.strings */,
 				D34A100015C6FB6D00346376 /* main.m */,
 				D34A100215C6FB6D00346376 /* ContatosIP67-Prefix.pch */,
+				D3D4DC9815C86D53004D67C2 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D3D4493515C9853900BE4B06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D34A101015C7193C00346376 /* Contato.h */,
+				D34A101115C7193C00346376 /* Contato.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D3D4493615C985B500BE4B06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D34A100D15C6FCF600346376 /* FormularioContatoViewConroller.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D3D4493715C985BD00BE4B06 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D3038B7D15C80D65009EE23D /* ListaContatosViewController.h */,
+				D3038B7E15C80D65009EE23D /* ListaContatosViewController.m */,
+				D34A100B15C6FCF600346376 /* FormularioContatoViewConroller.h */,
+				D34A100C15C6FCF600346376 /* FormularioContatoViewConroller.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D3D4493815C985C600BE4B06 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				D3D4492F15C974B300BE4B06 /* ListaContatosProtocol.h */,
+			);
+			name = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +181,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				pt,
 			);
 			mainGroup = D34A0FE515C6FB6D00346376;
 			productRefGroup = D34A0FF115C6FB6D00346376 /* Products */;
@@ -160,6 +200,7 @@
 			files = (
 				D34A0FFF15C6FB6D00346376 /* InfoPlist.strings in Resources */,
 				D34A100F15C6FCF600346376 /* FormularioContatoViewConroller.xib in Resources */,
+				D3D4DC9615C86D53004D67C2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +226,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				D34A0FFE15C6FB6D00346376 /* en */,
+				D3D4DC9215C86CC0004D67C2 /* pt */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D3D4DC9815C86D53004D67C2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3D4DC9715C86D53004D67C2 /* en */,
+				D3D4DC9915C86D58004D67C2 /* pt */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

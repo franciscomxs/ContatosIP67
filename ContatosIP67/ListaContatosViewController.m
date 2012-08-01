@@ -12,6 +12,7 @@
 @implementation ListaContatosViewController
 @synthesize contatos;
 
+#pragma mark - Métodos de apoio
 -(void)exibeFormulario{
 // -- Alerta
 //    UIAlertView *alert = [[UIAlertView alloc]
@@ -32,6 +33,7 @@
     
 }
 
+#pragma mark - Construtores
 - (id)init {
     self = [super init];
     if (self) {
@@ -45,6 +47,8 @@
     }
     return self;
 }
+
+#pragma mark - TableView
 
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
     Contato *tempContato = [self.contatos objectAtIndex:sourceIndexPath.row];
@@ -81,9 +85,6 @@
     [[self tableView] reloadData];
 }
 
--(void) dealloc{
-    self.contatos = nil;
-}
 
 -(void)tableView:(UITableView *)tableView
             commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
@@ -103,6 +104,14 @@
     [self.navigationController pushViewController:form animated:YES];
 }
 
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(exibeMaisAcoes:)];
+    [self.tableView addGestureRecognizer: longPress];
+}
+
+#pragma mark - Status do contato
+
 -(void)contatoAtualizado:(Contato *)contato{
     NSLog(@"Atualizado: %d", [self.contatos indexOfObject:contato]);
 }
@@ -110,4 +119,29 @@
     NSLog(@"Adicionado: %d", [self.contatos indexOfObject:contato]);
 }
 
+#pragma mark - Gestos
+-(void)exibeMaisAcoes:(UIGestureRecognizer *)gesture{
+    if(gesture.state == UIGestureRecognizerStateBegan){
+        CGPoint ponto = [gesture locationInView:self.tableView];
+        NSIndexPath *index = [self.tableView indexPathForRowAtPoint:ponto];
+        Contato *contato = [contatos objectAtIndex:index.row];
+        contatoSelecionado = contato;
+        UIActionSheet *opcoes = [[UIActionSheet alloc]
+                                 initWithTitle:contato.nome
+                                 delegate:self
+                                 cancelButtonTitle:@"Cancelar"
+                                 destructiveButtonTitle:nil
+                                 otherButtonTitles:@"Ligar", @"Enviar Email", @"Visualizar Site", @"Abrir Mapa", nil];
+        [opcoes showInView:self.view];
+    }
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+}
+
+#pragma mark - Memória
+
+-(void) dealloc{
+    self.contatos = nil;
+}
 @end
