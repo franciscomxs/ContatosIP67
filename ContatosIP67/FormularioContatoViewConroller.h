@@ -10,7 +10,7 @@
 #import "ListaContatosProtocol.h"
 #import "Contato.h"
 
-@interface FormularioContatoViewConroller : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate>
+@interface FormularioContatoViewConroller : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 @property(nonatomic, weak) IBOutlet UITextField *nome;
 @property(nonatomic, weak) IBOutlet UITextField *telefone;
 @property(nonatomic, weak) IBOutlet UITextField *email;
@@ -19,8 +19,13 @@
 @property(nonatomic, weak) IBOutlet UITextField *twitter;
 @property(strong) NSMutableArray *contatos;
 @property(strong) Contato *contato;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroll;
 -(id)initWithContato:(Contato *)_contato;
 @property (weak, nonatomic) IBOutlet UIButton *botaoFoto;
 @property (weak) id<ListaContatosProtocol> delegate;
 -(IBAction)selecionaFoto:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *latitude;
+@property (weak, nonatomic) IBOutlet UITextField *longitude;
+@property (weak) UITextField *campoAtual;
+@property CGSize tamanhoInicialDoScroll;
 @end

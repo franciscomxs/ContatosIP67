@@ -9,7 +9,8 @@
 #import "FormularioContatoViewConroller.h"
 
 @implementation FormularioContatoViewConroller : UIViewController
-@synthesize nome, telefone, email, endereco, site, contatos, contato, delegate, twitter, botaoFoto;
+@synthesize scroll;
+@synthesize nome, telefone, email, endereco, site, contatos, contato, delegate, twitter, botaoFoto, latitude, longitude, campoAtual, tamanhoInicialDoScroll;
 
 #pragma mark - Contatos
 
@@ -94,7 +95,44 @@
     NSLog(@"Total cadastrados: %i", [[self contatos] count]);
 }
 
-#pragma mark - Construtores
+#pragma mark - Scrool
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    campoAtual = textField;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    campoAtual = nil;
+}
+
+-(void)tecladoApareceu:(NSNotification *)notification{
+    NSDictionary *info = [notification userInfo];
+    CGRect areaDoTeclado = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGSize tamanhoDoTeclado = areaDoTeclado.size;
+    //UIScrollView *scroll = (UIScrollView *) self.view; // Não é necessário pois mantivemos a UIScrollView DENTRO da VIEW
+    UIEdgeInsets margens = UIEdgeInsetsMake(0.0, 0.0, tamanhoDoTeclado.height, 0.0);
+    scroll.contentInset = margens;
+    scroll.scrollIndicatorInsets = margens;
+    
+    if(campoAtual)
+    {
+        CGFloat alturaEscondida = tamanhoDoTeclado.height + self.navigationController.navigationBar.frame.size.height;
+        CGRect tamanhoDaTela = scroll.frame;
+        tamanhoDaTela.size.height = alturaEscondida;
+        
+        BOOL campoAtualSumiu = !CGRectContainsPoint(tamanhoDaTela, campoAtual.frame.origin);
+        if(campoAtualSumiu){
+            CGFloat tamanhoAdicional = tamanhoDoTeclado.height - self.navigationController.navigationBar.frame.size.height;
+            CGPoint pontoVisivel = CGPointMake(0.0, campoAtual.frame.origin.y - tamanhoAdicional);
+            [scroll setContentOffset:pontoVisivel animated:YES];
+        }
+    }
+}
+-(void) tecladoSumiu:(NSNotification *)notification{
+    
+}
+
+#pragma mark - Construtores e inicializadores
 
 -(id) init{
     self = [super init];
@@ -146,8 +184,16 @@
         {
             [botaoFoto setImage:contato.foto forState: UIControlStateNormal];
         }
-        
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tecladoApareceu:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tecladoSumiu:)
+                                                 name:UIKeyboardDidHideNotification object:nil];
+    tamanhoInicialDoScroll = self.view.frame.size;
 }
 
 #pragma mark - Gerencia de Memoria
@@ -157,6 +203,9 @@
 
 - (void)viewDidUnload {
     [self setBotaoFoto:nil];
+    [self setLatitude:nil];
+    [self setLongitude:nil];
+    [self setScroll:nil];
     [super viewDidUnload];
 }
 @end

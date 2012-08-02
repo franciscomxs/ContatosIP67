@@ -192,12 +192,12 @@
 		D3D4493715C985BD00BE4B06 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D3A8170A15CACA6C000C910A /* ContatosNoMapaViewController.m */,
 				D3A8170815CACA5F000C910A /* ContatosNoMapaViewController.h */,
-				D34A100C15C6FCF600346376 /* FormularioContatoViewConroller.m */,
+				D3A8170A15CACA6C000C910A /* ContatosNoMapaViewController.m */,
 				D3038B7D15C80D65009EE23D /* ListaContatosViewController.h */,
 				D3038B7E15C80D65009EE23D /* ListaContatosViewController.m */,
 				D34A100B15C6FCF600346376 /* FormularioContatoViewConroller.h */,
+				D34A100C15C6FCF600346376 /* FormularioContatoViewConroller.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
