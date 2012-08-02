@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CLGeocoder.h>
+#import <CoreLocation/CLPlacemark.h>
 #import "ListaContatosProtocol.h"
 #import "Contato.h"
 
@@ -27,4 +29,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *longitude;
 @property (weak) UITextField *campoAtual;
 @property CGSize tamanhoInicialDoScroll;
+-(IBAction)buscarCoordenadas:(id)sender;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @end

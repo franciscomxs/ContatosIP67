@@ -10,5 +10,6 @@
 
 @interface Contato : NSObject <NSCoding>
 @property(nonatomic, strong) NSString *nome, *email, *telefone, *endereco, *site, *twitter;
+@property(nonatomic, strong) NSNumber *latitude, *longitude;
 @property(strong) UIImage *foto;
 @end

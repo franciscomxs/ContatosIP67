@@ -9,6 +9,7 @@
 #import "FormularioContatoViewConroller.h"
 
 @implementation FormularioContatoViewConroller : UIViewController
+@synthesize spinner;
 
 @synthesize nome, telefone, email, endereco, site, contatos, contato, delegate, twitter, botaoFoto, latitude, longitude, campoAtual, tamanhoInicialDoScroll;
 
@@ -40,6 +41,8 @@
     contato.endereco = endereco.text;
     contato.site = site.text;
     contato.twitter = twitter.text;
+    contato.latitude = [NSNumber numberWithFloat:[latitude.text floatValue]];
+    contato.longitude = [NSNumber numberWithFloat:[longitude.text floatValue]];
     return contato;
     
 }
@@ -138,6 +141,26 @@
     [scroll setContentOffset: CGPointZero animated:YES];
 }
 
+
+#pragma mark - GeoCode
+
+-(IBAction)buscarCoordenadas:(id)sender{
+    [sender setHidden:YES];
+    [spinner startAnimating];
+    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+    [geocoder geocodeAddressString:endereco.text completionHandler:
+     ^(NSArray *resultados, NSError *error){
+         if(error == nil && resultados.count > 0){
+             CLPlacemark *resultado = [resultados objectAtIndex:0];
+             CLLocationCoordinate2D coordenada = resultado.location.coordinate;
+             latitude.text = [NSString stringWithFormat:@"%f", coordenada.latitude];
+             longitude.text = [NSString stringWithFormat:@"%f", coordenada.longitude];
+         }
+         [spinner stopAnimating];
+         [sender setHidden:NO];
+     }];
+}
+
 #pragma mark - Construtores e inicializadores
 
 -(id) init{
@@ -186,6 +209,8 @@
         endereco.text = contato.endereco;
         site.text = contato.site;
         twitter.text = contato.twitter;
+        latitude.text = [contato.latitude stringValue];
+        longitude.text = [contato.longitude stringValue];
         if(contato.foto)
         {
             [botaoFoto setImage:contato.foto forState: UIControlStateNormal];
@@ -211,6 +236,7 @@
     [self setBotaoFoto:nil];
     [self setLatitude:nil];
     [self setLongitude:nil];
+    [self setSpinner:nil];
     [super viewDidUnload];
 }
 @end
