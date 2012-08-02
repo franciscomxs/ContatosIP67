@@ -97,6 +97,14 @@
                                                   action:@selector(exibeFormulario)];
         self.navigationItem.rightBarButtonItem = botaoExibirFormulario;
         [[self navigationItem] setLeftBarButtonItem:self.editButtonItem];
+        
+        UIImage *imagemTabItem = [UIImage imageNamed:@"lista-contatos.png"];
+        UITabBarItem *tabItem = [[UITabBarItem alloc]
+                                 initWithTitle:@"Contatos"
+                                 image:imagemTabItem
+                                 tag:0];
+        self.tabBarItem = tabItem;
+        self.navigationItem.title = @"Contatos";
     }
     return self;
 }
