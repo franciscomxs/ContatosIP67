@@ -19,26 +19,33 @@
 {
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
     
+    // Carregamento dos contatos do arquivo
     NSArray *usersDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString  *documentDir = [usersDirs objectAtIndex:0];
     self.arquivoContatos = [NSString stringWithFormat:@"%@/ArquivoContatos", documentDir];
     
+    // Listagem de Contatos
     self.contatos = [NSKeyedUnarchiver unarchiveObjectWithFile:self.arquivoContatos];
     if(!self.contatos){
         self.contatos = [[NSMutableArray alloc] init ];
     }
-    
     
     ListaContatosViewController *lista = [[ListaContatosViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lista];
 
     [lista setContatos: [self contatos]];
     
+    // Mostrando localização no mapa
     ContatosNoMapaViewController *contatosMapa = [[ContatosNoMapaViewController alloc] init];
+    UINavigationController *mapaNavigation = [[UINavigationController alloc]
+                                              initWithRootViewController:contatosMapa];
     
+    
+    // Tabs
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = [NSArray arrayWithObjects:nav, contatosMapa, nil];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:nav, mapaNavigation, nil];
     
+    // View
     [[self window] setRootViewController: tabBarController];
     [[self window] setBackgroundColor: [UIColor whiteColor]];
     [[self window] makeKeyAndVisible];

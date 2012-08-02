@@ -7,8 +7,10 @@
 //
 
 #import "ContatosNoMapaViewController.h"
+#import <MapKit/MKUserTrackingBarButtonItem.h>
 
 @implementation ContatosNoMapaViewController
+@synthesize mapa;
 
 -(id)init{
     self = [super init];
@@ -16,8 +18,18 @@
         UIImage *imageTabItem = [UIImage imageNamed:@"mapa-contatos.png"];
         UITabBarItem *tabItem = [[UITabBarItem alloc] initWithTitle:@"Mapa" image:imageTabItem tag:0 ];
         self.tabBarItem = tabItem;
+        self.navigationItem.title = @"Localização";
     }
     return self;
 }
 
+- (void)viewDidUnload {
+    [self setMapa:nil];
+    [super viewDidUnload];
+}
+
+-(void)viewDidLoad{
+    MKUserTrackingBarButtonItem *botaoLocalizacao = [[MKUserTrackingBarButtonItem alloc] initWithMapView:self.mapa];
+    self.navigationItem.leftBarButtonItem = botaoLocalizacao;
+}
 @end
