@@ -75,7 +75,7 @@
 }
 
 -(void)abrirMapa{
-    NSString * url = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", contatoSelecionado.site];
+    NSString * url = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@", contatoSelecionado.endereco];
     [self abrirAplicativoComUrl:url];
 }
 

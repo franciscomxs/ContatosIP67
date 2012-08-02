@@ -15,6 +15,7 @@
 @synthesize endereco = _endereco;
 @synthesize site = _site;
 @synthesize twitter = _twitter;
+@synthesize foto;
 
 -(void)setNome:(NSString *)nome{
     if(nome.length > 0){
@@ -59,6 +60,7 @@
     [coder encodeObject:self.endereco forKey:@"endereco"];
     [coder encodeObject:self.site forKey:@"site"];
     [coder encodeObject:self.site forKey:@"tweet_user"];
+    [coder encodeObject:self.foto forKey:@"foto"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder{
@@ -70,6 +72,7 @@
         [self setEndereco: [decoder decodeObjectForKey:@"endereco"]];
         [self setSite: [decoder decodeObjectForKey:@"site"]];
         [self setSite: [decoder decodeObjectForKey:@"tweet_user"]];
+        [self setFoto: [decoder decodeObjectForKey:@"foto"]];
     }
     
     return self;

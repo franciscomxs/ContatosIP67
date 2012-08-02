@@ -28,6 +28,11 @@
         contato = [[Contato alloc] init ];
     }
     
+    if(botaoFoto.imageView.image)
+    {
+        contato.foto = botaoFoto.imageView.image;
+    }
+
     contato.nome = nome.text;
     contato.email = email.text;
     contato.telefone = telefone.text;
@@ -62,7 +67,13 @@
 
 -(IBAction)selecionaFoto:(id)sender{
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-        
+        UIActionSheet *sheet = [[UIActionSheet alloc]
+                                initWithTitle:@"Escolha a foto do contato"
+                                delegate: self
+                                cancelButtonTitle:@"Cancelar"
+                                destructiveButtonTitle:nil
+                                otherButtonTitles:@"Tirar foto", @"Escolher da Biblioteca", nil];
+        [sheet showInView:self.view];
     }
     else{
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -131,6 +142,11 @@
         endereco.text = contato.endereco;
         site.text = contato.site;
         twitter.text = contato.twitter;
+        if(contato.foto)
+        {
+            [botaoFoto setImage:contato.foto forState: UIControlStateNormal];
+        }
+        
     }
 }
 
