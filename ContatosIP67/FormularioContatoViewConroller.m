@@ -9,7 +9,7 @@
 #import "FormularioContatoViewConroller.h"
 
 @implementation FormularioContatoViewConroller : UIViewController
-@synthesize scroll;
+
 @synthesize nome, telefone, email, endereco, site, contatos, contato, delegate, twitter, botaoFoto, latitude, longitude, campoAtual, tamanhoInicialDoScroll;
 
 #pragma mark - Contatos
@@ -109,7 +109,7 @@
     NSDictionary *info = [notification userInfo];
     CGRect areaDoTeclado = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGSize tamanhoDoTeclado = areaDoTeclado.size;
-    //UIScrollView *scroll = (UIScrollView *) self.view; // Não é necessário pois mantivemos a UIScrollView DENTRO da VIEW
+    UIScrollView *scroll = (UIScrollView *) self.view;
     UIEdgeInsets margens = UIEdgeInsetsMake(0.0, 0.0, tamanhoDoTeclado.height, 0.0);
     scroll.contentInset = margens;
     scroll.scrollIndicatorInsets = margens;
@@ -125,11 +125,17 @@
             CGFloat tamanhoAdicional = tamanhoDoTeclado.height - self.navigationController.navigationBar.frame.size.height;
             CGPoint pontoVisivel = CGPointMake(0.0, campoAtual.frame.origin.y - tamanhoAdicional);
             [scroll setContentOffset:pontoVisivel animated:YES];
+            
+            CGSize scrollContentSize = scroll.contentSize;
+            scrollContentSize.height += alturaEscondida + campoAtual.frame.size.height;
+            scroll.contentSize = scrollContentSize;
         }
     }
 }
 -(void) tecladoSumiu:(NSNotification *)notification{
-    
+    UIScrollView *scroll = (UIScrollView *) self.view;
+    scroll.contentSize = tamanhoInicialDoScroll;
+    [scroll setContentOffset: CGPointZero animated:YES];
 }
 
 #pragma mark - Construtores e inicializadores
@@ -205,7 +211,6 @@
     [self setBotaoFoto:nil];
     [self setLatitude:nil];
     [self setLongitude:nil];
-    [self setScroll:nil];
     [super viewDidUnload];
 }
 @end

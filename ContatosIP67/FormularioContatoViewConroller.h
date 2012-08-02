@@ -19,7 +19,6 @@
 @property(nonatomic, weak) IBOutlet UITextField *twitter;
 @property(strong) NSMutableArray *contatos;
 @property(strong) Contato *contato;
-@property (weak, nonatomic) IBOutlet UIScrollView *scroll;
 -(id)initWithContato:(Contato *)_contato;
 @property (weak, nonatomic) IBOutlet UIButton *botaoFoto;
 @property (weak) id<ListaContatosProtocol> delegate;
