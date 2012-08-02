@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "FormularioContatoViewConroller.h"
 #import "ListaContatosViewController.h"
+#import "ContatosNoMapaViewController.h"
 
 @implementation AppDelegate
 
@@ -33,11 +34,15 @@
 
     [lista setContatos: [self contatos]];
     
-    [[self window] setRootViewController: nav];
+    ContatosNoMapaViewController *contatosMapa = [[ContatosNoMapaViewController alloc] init];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:nav, contatosMapa, nil];
+    
+    [[self window] setRootViewController: tabBarController];
     [[self window] setBackgroundColor: [UIColor whiteColor]];
     [[self window] makeKeyAndVisible];
     
-        
     return YES;
     
 }
