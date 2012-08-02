@@ -10,7 +10,7 @@
 #import "ListaContatosProtocol.h"
 #import "Contato.h"
 
-@interface FormularioContatoViewConroller : UIViewController
+@interface FormularioContatoViewConroller : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property(nonatomic, weak) IBOutlet UITextField *nome;
 @property(nonatomic, weak) IBOutlet UITextField *telefone;
 @property(nonatomic, weak) IBOutlet UITextField *email;
@@ -20,5 +20,7 @@
 @property(strong) NSMutableArray *contatos;
 @property(strong) Contato *contato;
 -(id)initWithContato:(Contato *)_contato;
+@property (weak, nonatomic) IBOutlet UIButton *botaoFoto;
 @property (weak) id<ListaContatosProtocol> delegate;
+-(IBAction)selecionaFoto:(id)sender;
 @end

@@ -9,7 +9,9 @@
 #import "FormularioContatoViewConroller.h"
 
 @implementation FormularioContatoViewConroller : UIViewController
-@synthesize nome, telefone, email, endereco, site, contatos, contato, delegate, twitter;
+@synthesize nome, telefone, email, endereco, site, contatos, contato, delegate, twitter, botaoFoto;
+
+#pragma mark - Contatos
 
 -(Contato *)pegaDadosFormulario{
     /*
@@ -44,7 +46,7 @@
         [self.delegate contatoAdicionado:novoContato];
     }
 }
-#pragma mark - 
+
 -(void)atualizaContato{
     Contato * contatoAtualizado = [self pegaDadosFormulario];
     if(self.delegate){
@@ -57,9 +59,32 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+
+-(IBAction)selecionaFoto:(id)sender{
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        
+    }
+    else{
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.allowsEditing = YES;
+        picker.delegate = self;
+        [self presentModalViewController:picker animated:YES];
+    }
+        
+}
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *imagemSelecionada = [info valueForKey:UIImagePickerControllerEditedImage];
+    [botaoFoto setImage:imagemSelecionada forState:UIControlStateNormal];
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"Total cadastrados: %i", [[self contatos] count]);
 }
+
+#pragma mark - Construtores
+
 -(id) init{
     self = [super init];
     if(self){
@@ -109,9 +134,13 @@
     }
 }
 
-
+#pragma mark - Gerencia de Memoria
 -(void) dealloc{
     self.contatos = nil;
 }
 
+- (void)viewDidUnload {
+    [self setBotaoFoto:nil];
+    [super viewDidUnload];
+}
 @end
