@@ -227,6 +227,12 @@
     tamanhoInicialDoScroll = self.view.frame.size;
 }
 
+#pragma mark - Orientação da Tela
+
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
 #pragma mark - Gerencia de Memoria
 -(void) dealloc{
     self.contatos = nil;

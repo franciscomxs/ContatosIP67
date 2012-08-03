@@ -110,7 +110,6 @@
 }
 
 #pragma mark - TableView
-
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
     Contato *tempContato = [self.contatos objectAtIndex:sourceIndexPath.row];
     [self.contatos removeObjectAtIndex:sourceIndexPath.row];
@@ -218,8 +217,10 @@
     }
 }
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
-    return true;
+#pragma mark - Orientação da Tela
+
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
 }
 
 #pragma mark - Memória

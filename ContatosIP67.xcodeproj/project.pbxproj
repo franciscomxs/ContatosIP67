@@ -19,6 +19,7 @@
 		D34A101215C7193C00346376 /* Contato.m in Sources */ = {isa = PBXBuildFile; fileRef = D34A101115C7193C00346376 /* Contato.m */; };
 		D37E1A8015C9AA2300DB2269 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3AFF43615C9A239007B204B /* MessageUI.framework */; };
 		D38ECC6C15CABC49005BE2B0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38ECC6B15CABC49005BE2B0 /* MapKit.framework */; };
+		D3A0474315CC284200651167 /* ModelContatos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3A0474115CC284200651167 /* ModelContatos.xcdatamodeld */; };
 		D3A816FB15CAC773000C910A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A816F215CAC773000C910A /* Default.png */; };
 		D3A816FC15CAC773000C910A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A816F315CAC773000C910A /* Default@2x.png */; };
 		D3A816FD15CAC773000C910A /* gps.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A816F415CAC773000C910A /* gps.png */; };
@@ -54,6 +55,7 @@
 		D34A101015C7193C00346376 /* Contato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contato.h; sourceTree = "<group>"; };
 		D34A101115C7193C00346376 /* Contato.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contato.m; sourceTree = "<group>"; };
 		D38ECC6B15CABC49005BE2B0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D3A0474215CC284200651167 /* ModelContatos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelContatos.xcdatamodel; sourceTree = "<group>"; };
 		D3A816F215CAC773000C910A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D3A816F315CAC773000C910A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D3A816F415CAC773000C910A /* gps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gps.png; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			children = (
 				D34A101015C7193C00346376 /* Contato.h */,
 				D34A101115C7193C00346376 /* Contato.m */,
+				D3A0474115CC284200651167 /* ModelContatos.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				D34A101215C7193C00346376 /* Contato.m in Sources */,
 				D3038B7F15C80D65009EE23D /* ListaContatosViewController.m in Sources */,
 				D3A8170B15CACA6C000C910A /* ContatosNoMapaViewController.m in Sources */,
+				D3A0474315CC284200651167 /* ModelContatos.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +414,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D3A0474115CC284200651167 /* ModelContatos.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D3A0474215CC284200651167 /* ModelContatos.xcdatamodel */,
+			);
+			currentVersion = D3A0474215CC284200651167 /* ModelContatos.xcdatamodel */;
+			path = ModelContatos.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D34A0FE715C6FB6D00346376 /* Project object */;
 }
