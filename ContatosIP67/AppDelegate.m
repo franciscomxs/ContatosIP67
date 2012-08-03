@@ -37,6 +37,8 @@
     
     // Mostrando localização no mapa
     ContatosNoMapaViewController *contatosMapa = [[ContatosNoMapaViewController alloc] init];
+    
+    [contatosMapa setContatos:contatos];
     UINavigationController *mapaNavigation = [[UINavigationController alloc]
                                               initWithRootViewController:contatosMapa];
     

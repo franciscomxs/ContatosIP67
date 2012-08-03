@@ -53,6 +53,10 @@
     }    
 }
 
+-(CLLocationCoordinate2D)coordinate{
+    return CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
+}
+
 -(void)encodeWithCoder:(NSCoder *)coder{
     [coder encodeObject:self.nome forKey:@"nome"];
     [coder encodeObject:self.email forKey:@"email"];

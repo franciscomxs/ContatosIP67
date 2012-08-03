@@ -10,7 +10,9 @@
 #import <MapKit/MKUserTrackingBarButtonItem.h>
 
 @implementation ContatosNoMapaViewController
-@synthesize mapa;
+@synthesize mapa, contatos;
+
+#pragma mark - Construtores
 
 -(id)init{
     self = [super init];
@@ -21,6 +23,16 @@
         self.navigationItem.title = @"Localização";
     }
     return self;
+}
+
+#pragma mark - Ações da View
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self.mapa addAnnotations:contatos];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.mapa removeAnnotations:contatos];
 }
 
 - (void)viewDidUnload {
