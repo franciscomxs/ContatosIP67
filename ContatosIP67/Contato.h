@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface Contato : NSObject <NSCoding, MKAnnotation>
+@interface Contato : NSManagedObject <MKAnnotation>
 @property(nonatomic, strong) NSString *nome, *email, *telefone, *endereco, *site, *twitter;
 @property(nonatomic, strong) NSNumber *latitude, *longitude;
 @property(strong) UIImage *foto;

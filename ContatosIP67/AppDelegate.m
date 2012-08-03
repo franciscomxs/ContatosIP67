@@ -18,17 +18,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
+
+// Removido por causa do Core Data    
+//    // Carregamento dos contatos do arquivo
+//    NSArray *usersDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString  *documentDir = [usersDirs objectAtIndex:0];
+//    self.arquivoContatos = [NSString stringWithFormat:@"%@/ArquivoContatos", documentDir];
     
-    // Carregamento dos contatos do arquivo
-    NSArray *usersDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString  *documentDir = [usersDirs objectAtIndex:0];
-    self.arquivoContatos = [NSString stringWithFormat:@"%@/ArquivoContatos", documentDir];
-    
-    // Listagem de Contatos
-    self.contatos = [NSKeyedUnarchiver unarchiveObjectWithFile:self.arquivoContatos];
-    if(!self.contatos){
-        self.contatos = [[NSMutableArray alloc] init ];
-    }
+//    // Listagem de Contatos
+//    self.contatos = [NSKeyedUnarchiver unarchiveObjectWithFile:self.arquivoContatos];
+//    if(!self.contatos){
+//        self.contatos = [[NSMutableArray alloc] init ];
+//    }
     
     ListaContatosViewController *lista = [[ListaContatosViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lista];
@@ -104,7 +105,8 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [NSKeyedArchiver archiveRootObject:self.contatos toFile:self.arquivoContatos];
+    // Removido para usar CoreData
+    //[NSKeyedArchiver archiveRootObject:self.contatos toFile:self.arquivoContatos];
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
