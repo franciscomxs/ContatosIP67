@@ -31,4 +31,6 @@
 @property CGSize tamanhoInicialDoScroll;
 -(IBAction)buscarCoordenadas:(id)sender;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+
+@property (weak) NSManagedObjectContext *contexto;
 @end

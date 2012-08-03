@@ -11,7 +11,7 @@
 #import "FormularioContatoViewConroller.h"
 #import <Twitter/TWTweetComposeViewController.h>
 @implementation ListaContatosViewController
-@synthesize contatos;
+@synthesize contatos, contexto;
 
 #pragma mark - Métodos de apoio
 
@@ -27,6 +27,7 @@
     FormularioContatoViewConroller *f = [[FormularioContatoViewConroller alloc] init];
     f.delegate = self;
     f.contatos = [self contatos];
+    f.contexto = [self contexto];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:f];
 // -- Transição

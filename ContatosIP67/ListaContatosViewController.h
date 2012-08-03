@@ -19,4 +19,6 @@
 -(void)contatoAdicionado:(Contato *)contato;
 -(void)exibeMaisAcoes:(UIGestureRecognizer *)gesture;
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+
+@property (weak) NSManagedObjectContext *contexto;
 @end

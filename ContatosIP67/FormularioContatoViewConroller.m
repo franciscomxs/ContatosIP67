@@ -11,7 +11,7 @@
 @implementation FormularioContatoViewConroller : UIViewController
 @synthesize spinner;
 
-@synthesize nome, telefone, email, endereco, site, contatos, contato, delegate, twitter, botaoFoto, latitude, longitude, campoAtual, tamanhoInicialDoScroll;
+@synthesize nome, telefone, email, endereco, site, contatos, contato, delegate, twitter, botaoFoto, latitude, longitude, campoAtual, tamanhoInicialDoScroll, contexto;
 
 #pragma mark - Contatos
 
@@ -27,7 +27,9 @@
     */
     if(!self.contato)
     {
-        contato = [[Contato alloc] init ];
+        contato = [NSEntityDescription
+                   insertNewObjectForEntityForName:@"Contato"
+                   inManagedObjectContext:self.contexto];
     }
     
     if(botaoFoto.imageView.image)
