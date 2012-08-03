@@ -7,6 +7,7 @@
 //
 
 #import "ContatosNoMapaViewController.h"
+#import "FormularioContatoViewConroller.h"
 #import <MapKit/MapKit.h>
 #import "Contato.h"
 
@@ -48,9 +49,23 @@
         UIImageView *imagemContato = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
         imagemContato.image = contato.foto;
         pino.leftCalloutAccessoryView = imagemContato;
+        pino.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return pino;
     
+}
+
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+    
+    Contato *c = (Contato *) view.annotation;
+    
+    FormularioContatoViewConroller *f = [[FormularioContatoViewConroller alloc] init ];
+    f.contato = c;
+    
+    [[self navigationController] pushViewController:f animated:YES];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Titulo" message:c.nome delegate:self cancelButtonTitle:@"Cancelar" otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma mark - Ações da View
