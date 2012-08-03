@@ -13,7 +13,7 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window, contatos, arquivoContatos;
+@synthesize window = _window, contatos, arquivoContatos, contexto = _contexto;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -55,6 +55,44 @@
     return YES;
     
 }
+
+// CoreData
+
+-(NSURL *) applicationDocumentDirectory{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDirectory]lastObject];
+}
+
+-(NSManagedObjectModel *)managedObjectModel{
+    NSURL *modelUrl = [[NSBundle mainBundle]
+                       URLForResource:@"ModelContatos"
+                       withExtension:@"momd"];
+    
+    NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
+    
+    return managedObjectModel;
+}
+
+-(NSPersistentStoreCoordinator *)coodinator{
+    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:[self managedObjectModel]];
+    
+    NSURL *pastaDocuments = [self applicationDocumentDirectory];
+    NSURL * localBancoDeDados = [pastaDocuments URLByAppendingPathComponent:@"Contatos.sqlite"];
+    [coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:localBancoDeDados options:nil error:nil];
+    
+    return coordinator;
+}
+
+-(NSManagedObjectContext *)contexto{
+    if(_contexto){
+        return _contexto;
+    }
+    NSPersistentStoreCoordinator *coordinator = [self coodinator];
+    _contexto = [[NSManagedObjectContext alloc] init];
+    [_contexto setPersistentStoreCoordinator:coordinator];
+    return _contexto;
+}
+
+// ----------------------------------------------------------------------------------------
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
