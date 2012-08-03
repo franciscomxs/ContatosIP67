@@ -92,6 +92,13 @@
     }
 }
 
+-(void)buscarContatos{
+    NSFetchRequest *buscaContatos = [NSFetchRequest fetchRequestWithEntityName:@"Contato"];
+    NSSortDescriptor *ordemPorNome =[NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES];
+    [buscaContatos setSortDescriptors:[NSArray arrayWithObject:ordemPorNome]];
+    NSArray *contatosImutaveis = [self.contexto executeFetchRequest:buscaContatos error:nil];
+    self.contatos = [contatosImutaveis mutableCopy];
+}
 // -----------------------------------------------------
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -99,6 +106,7 @@
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
     
     [self inserirDados];
+    [self buscarContatos];
     
     // Removido por causa do Core Data    
     //    // Carregamento dos contatos do arquivo

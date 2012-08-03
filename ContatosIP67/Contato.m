@@ -22,6 +22,15 @@
 @dynamic nome, email, telefone, endereco, site, twitter, latitude, longitude;
 @synthesize foto;
 
+#pragma mark - CoreData
+
+-(void)setNome:(NSString *)nome{
+    [self willChangeValueForKey:@"nome"];
+    [self setPrimitiveValue:nome forKey:@"nome"];
+    [self didChangeValueForKey:@"nome"];
+}
+
+
 #pragma mark - Getters do geocoder
 
 -(CLLocationCoordinate2D)coordinate{
