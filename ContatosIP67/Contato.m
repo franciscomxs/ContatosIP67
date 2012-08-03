@@ -53,9 +53,31 @@
     }    
 }
 
+#pragma mark - Getters do geocoder
+
 -(CLLocationCoordinate2D)coordinate{
     return CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
 }
+
+-(NSString *)title{
+    if(_nome.length > 0){
+        return _nome;
+    }
+    else{
+        return @"Sem vergonha não tem nome";
+    }
+    
+}
+-(NSString *)subtitle{
+    if(_endereco.length > 0){
+        return _endereco; 
+    }
+    else{
+        return @"Sem vergonha sem endereço";
+    }
+}
+
+#pragma mark - 
 
 -(void)encodeWithCoder:(NSCoder *)coder{
     [coder encodeObject:self.nome forKey:@"nome"];
