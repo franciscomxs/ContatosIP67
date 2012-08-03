@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.m
 //  ContatosIP67
@@ -15,48 +16,7 @@
 
 @synthesize window = _window, contatos, arquivoContatos, contexto = _contexto;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
-
-// Removido por causa do Core Data    
-//    // Carregamento dos contatos do arquivo
-//    NSArray *usersDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString  *documentDir = [usersDirs objectAtIndex:0];
-//    self.arquivoContatos = [NSString stringWithFormat:@"%@/ArquivoContatos", documentDir];
-    
-//    // Listagem de Contatos
-//    self.contatos = [NSKeyedUnarchiver unarchiveObjectWithFile:self.arquivoContatos];
-//    if(!self.contatos){
-//        self.contatos = [[NSMutableArray alloc] init ];
-//    }
-    
-    ListaContatosViewController *lista = [[ListaContatosViewController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lista];
-
-    [lista setContatos: [self contatos]];
-    
-    // Mostrando localização no mapa
-    ContatosNoMapaViewController *contatosMapa = [[ContatosNoMapaViewController alloc] init];
-    
-    [contatosMapa setContatos:contatos];
-    UINavigationController *mapaNavigation = [[UINavigationController alloc]
-                                              initWithRootViewController:contatosMapa];
-    
-    
-    // Tabs
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = [NSArray arrayWithObjects:nav, mapaNavigation, nil];
-    
-    // View
-    [[self window] setRootViewController: tabBarController];
-    [[self window] setBackgroundColor: [UIColor whiteColor]];
-    [[self window] makeKeyAndVisible];
-    
-    return YES;
-    
-}
-
+// -----------------------------------------------------
 // CoreData
 
 -(NSURL *) applicationDocumentDirectory{
@@ -93,7 +53,92 @@
     return _contexto;
 }
 
-// ----------------------------------------------------------------------------------------
+-(void)salvaContexto{
+    NSError *error;
+    if(![self.contexto save:&error]){
+        NSDictionary *informacoes = [error userInfo];
+        NSArray *multiplosErros = [informacoes objectForKey:NSDetailedErrorsKey];
+        
+        if(multiplosErros){
+            for (NSError *erro in multiplosErros) {
+                NSLog(@"Erro: %@", [erro userInfo]);
+            }
+        }
+        else{
+            NSLog(@"Ocorreu um problema: %@", informacoes);
+        }
+    }
+}
+
+-(void)inserirDados{
+    NSUserDefaults *configuracoes = [NSUserDefaults standardUserDefaults];
+    BOOL dadosInseridos = [configuracoes boolForKey:@"dados_inseridos"];
+    if(!dadosInseridos){
+        Contato *caelumSP = [NSEntityDescription
+                             insertNewObjectForEntityForName:@"Contato"
+                             inManagedObjectContext:self.contexto];
+        caelumSP.nome = @"Caelum Un. São Paulo";
+        caelumSP.email = @"contato@caelum.com.br";
+        caelumSP.endereco = @"São Paulo, SP, Rua Vergueirom 3185";
+        caelumSP.telefone = @"01155712751";
+        caelumSP.site = @"http://caelum.com.br";
+        caelumSP.latitude =[NSNumber numberWithDouble:-23.5883034];
+        caelumSP.longitude =[NSNumber numberWithDouble:-46.632369];
+        
+        [self salvaContexto];
+        [configuracoes setBool:TRUE forKey:@"dados_inseridos"];
+        [configuracoes synchronize];
+        
+    }
+}
+
+// -----------------------------------------------------
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
+    
+    [self inserirDados];
+    
+    // Removido por causa do Core Data    
+    //    // Carregamento dos contatos do arquivo
+    //    NSArray *usersDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //    NSString  *documentDir = [usersDirs objectAtIndex:0];
+    //    self.arquivoContatos = [NSString stringWithFormat:@"%@/ArquivoContatos", documentDir];
+    
+    //    // Listagem de Contatos
+    //    self.contatos = [NSKeyedUnarchiver unarchiveObjectWithFile:self.arquivoContatos];
+    //    if(!self.contatos){
+    //        self.contatos = [[NSMutableArray alloc] init ];
+    //    }
+    
+    ListaContatosViewController *lista = [[ListaContatosViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:lista];
+    
+    [lista setContatos: [self contatos]];
+    
+    // Mostrando localização no mapa
+    ContatosNoMapaViewController *contatosMapa = [[ContatosNoMapaViewController alloc] init];
+    
+    [contatosMapa setContatos:contatos];
+    UINavigationController *mapaNavigation = [[UINavigationController alloc]
+                                              initWithRootViewController:contatosMapa];
+    
+    
+    // Tabs
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:nav, mapaNavigation, nil];
+    
+    // View
+    [[self window] setRootViewController: tabBarController];
+    [[self window] setBackgroundColor: [UIColor whiteColor]];
+    [[self window] makeKeyAndVisible];
+    
+    return YES;
+    
+}
+
+// -----------------------------------------------------
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
