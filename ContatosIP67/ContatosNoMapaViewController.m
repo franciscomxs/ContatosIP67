@@ -45,6 +45,7 @@
     Contato *contato = (Contato *) annotation;
     pino.pinColor = MKPinAnnotationColorGreen;
     pino.canShowCallout = YES;
+    pino.draggable = YES;
     if(contato.foto){
         UIImageView *imagemContato = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
         imagemContato.image = contato.foto;
@@ -66,6 +67,8 @@
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Titulo" message:c.nome delegate:self cancelButtonTitle:@"Cancelar" otherButtonTitles:nil];
     [alert show];
+    
+    
 }
 
 #pragma mark - Ações da View

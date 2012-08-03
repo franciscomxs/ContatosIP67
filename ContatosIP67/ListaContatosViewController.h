@@ -18,4 +18,5 @@
 -(void)contatoAtualizado:(Contato *)contato;
 -(void)contatoAdicionado:(Contato *)contato;
 -(void)exibeMaisAcoes:(UIGestureRecognizer *)gesture;
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
 @end

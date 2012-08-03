@@ -77,6 +77,26 @@
     }
 }
 
+#pragma mark - Setters do geocoder
+
+-(void)setCoordinate:(CLLocationCoordinate2D)newCoordinate{
+    self.latitude = [NSNumber numberWithFloat: newCoordinate.latitude];
+    self.longitude = [NSNumber numberWithFloat: newCoordinate.longitude];
+    
+    CLGeocoder *geocode = [[CLGeocoder alloc] init];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:[self.latitude doubleValue] longitude:[self.longitude doubleValue]];
+    [geocode reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if(error){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Erro!" message:@"Ocorreu algo inesperado." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }
+        else{
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            self.endereco = placemark.thoroughfare;
+        }
+    }];
+}
+
 #pragma mark - 
 
 -(void)encodeWithCoder:(NSCoder *)coder{

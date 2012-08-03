@@ -218,6 +218,9 @@
     }
 }
 
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+    return true;
+}
 
 #pragma mark - Memória
 
